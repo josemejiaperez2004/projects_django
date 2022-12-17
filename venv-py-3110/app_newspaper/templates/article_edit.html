@@ -1,0 +1,20 @@
+
+<!--
+    Pantalla de edicion de articulo
+-->
+
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="box-login">
+    <div class="login-content">
+        <h1>Editar</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="boton-login btn btn-info ml-2" type="submit">Actualizar</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

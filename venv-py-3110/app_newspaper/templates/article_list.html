@@ -1,0 +1,67 @@
+<!-- 
+    Pantalla de listado de todos lo articulos + los comentarios
+
+    LLamado de la base.html que trae menu, y block content
+    llamado de title
+    llamado de bloque o body 
+ -->
+{% extends "base.html" %}
+{% block title %}Articulos{% endblock title %}
+{% block content %}
+
+
+<!--
+    Apartado de articulos 
+    * Header, Body and Footer
+
+    For in para mostrar todos los articulos
+-->
+<div class="row">
+    <div class="videoss col-12">
+        <video src="https://carontestudio.com/img/f4.mp4" autoplay="true" muted="true" loop="true"
+            poster="https://carontestudio.com/img/contacto.jpg"></video>
+    </div>
+
+    {% for article in article_list %}
+
+    <div class="card col-12 d-flex justify-content-center">
+
+        <div class="card-header d-flex justify-content-center">
+            <span class="font-weight-bold">
+                {{ article.title }}
+            </span> &middot;
+            <span class="text-muted"> by {{ article.author }} |
+                {{ article.date }}
+            </span>
+        </div>
+
+
+        <div class="card-body d-flex justify-content-center align-items-center flex-column">
+            <p>{{ article.body }}</p>
+            <br>
+            <a class="links btn btn-outline-warning" href="{% url 'article_edit' article.pk %}">Editar....</a> 
+            <a class="links btn btn-outline-danger" href="{% url 'article_delete' article.pk %}">Eliminar</a> 
+            <a class="links btn btn-outline-success" href="{% url 'article_detail' article.pk %}">Detalles</a>
+        </div>
+
+
+        <!--
+        For in para mostrar todos los comentarios del respectivo articulo
+    -->
+        {% for comment in article.comment_set.all %}
+        <div class="card-footer d-flex justify-content-center">
+            <p>
+                <span class="font-weight-bold">
+                    {{ comment.author }} :
+                </span>
+                {{ comment }}
+            </p>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+{% endfor %}
+
+{% endblock content %}

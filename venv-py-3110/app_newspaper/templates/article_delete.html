@@ -1,0 +1,18 @@
+
+<!--
+    Pantalla de eliminacion de articulo
+-->
+
+{% extends "base.html" %}
+{% block content %}
+<div class="box-login">
+    <div class="login-content">
+        <h1>Eliminar</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            <p>¿Estas seguro de eliminar el articulo: "{{ article.title }}" ?</p>
+            <button class="boton-login btn btn-danger ml-2" type="submit">Confirmar</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

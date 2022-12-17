@@ -1,0 +1,93 @@
+
+<!--  
+    Carga de carpeta static
+-->
+{% load static %}
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width-device-width, initial.scale-1, shrink-to-fit-no">
+    <title>{% block title %}Newspaper App{% endblock title %}</title>
+    <!--
+        Links de boottrapt y css
+    -->
+    <link rel="stylesheet" href="{% static 'bootstrap-5.2.2-dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+
+<body>
+    <div class="container-fluid">
+
+        <!--
+            Cabecera de pagina
+        -->
+        <header class="header">
+            <!--
+                Inicio de Menu
+            -->
+            <nav class="menu">
+                <!--
+                    Logo
+                -->
+                <a class="logo-header" href="{% url 'home' %}">H O M E</a>
+                <!--
+                    Inicio de lista desordenada
+                -->
+                <ul>
+                    <!--
+                        Mientras el usuario haya iniciado sesion
+                    -->
+                    {% if user.is_authenticated %}
+
+                    <!--
+                        Lista desplegable al lado derecho del Menu,
+                    -->
+                    <div class="dropdown">
+                        <button onclick="myFunction()" class="dropbtn">
+                            {{ user.username }}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                            </svg>
+                        </button>
+                        <div id="myDropdown" class="dropdown-content">
+                            <a href="{% url 'article_list' %}">All Articles</a>
+                            <a href="{% url 'article_new' %}">New Article</a>
+                            <a href="{% url 'password_change' %}">Change Password</a>
+                            <a href="{% url 'logout' %}">log Out</a>
+                        </div>
+                    </div>
+
+
+
+                    <!--
+                        En caso de que el usuario no se haya logeado
+                    -->
+                    {% else %}
+                    <li><a href="{% url 'login' %}" class="">Inciar Sesión</a></li>
+                    <li><a href="{% url 'signup' %}" class="">Registrarse</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+
+        </header>
+
+
+        {% block content %}
+        {% endblock content %}
+
+
+    </div>
+
+    <!--
+        Links de js de bootrapt, menu desplegable y alerta
+    -->
+    <script src="{% static 'js/alerta.js' %}"></script>
+    <script src="{% static 'js/menuDesplegable.js' %}"></script>
+    <script src=" {% static 'bootstrap-5.2.2-dist/js/bootstrap.min.js' %}"></script>
+</body>
+
+</html>
